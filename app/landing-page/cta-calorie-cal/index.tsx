@@ -1,7 +1,7 @@
-'use client'
+"use client";
 import Image from "next/image";
 import React from "react";
-import StartJourneyModal from "../../components/start-journey-modal/page";
+import StartJourneyModal from "../../components/start-journey-modal/StartJourneyModal";
 
 export default function CtaCalorieCal() {
   return (

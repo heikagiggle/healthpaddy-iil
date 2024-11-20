@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import Image from "next/image";
-import StartJourneyModal from "../../components/start-journey-modal/page";
+import StartJourneyModal from "../../components/start-journey-modal/StartJourneyModal";
 
 const HeroSection = () => {
   return (
