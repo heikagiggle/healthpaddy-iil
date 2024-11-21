@@ -22,14 +22,16 @@ const BodyInfo = ({ onNextStep, onPrevStep }: ContainerProps) => {
   const onSubmit = async (data: BodyInfoData) => {
     const phone = sessionStorage.getItem("phone") || "";
     try {
-      await handleBioData({
+      const success = await handleBioData({
         gender: data.gender,
         dateOfBirth: `${data.dateOfBirth.day}/${data.dateOfBirth.month}/${data.dateOfBirth.year}`,
         weight: data.weight,
         height: `${data.heightFt}'${data.heightIn}`,
         phone,
       });
-      onNextStep && onNextStep();
+      if (success) {
+        onNextStep && onNextStep();
+      }
     } catch (error) {
       toast.error("There was an error submitting your Bio-data.");
     }

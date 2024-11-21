@@ -26,11 +26,13 @@ const TargetWeight = ({ onNextStep, onPrevStep }: ContainerProps) => {
   const onSubmit = async (data: PersonalInfoData) => {
     const phone = sessionStorage.getItem("phone") || "";
     try {
-      await handleTargetWeight({
+      const success = await handleTargetWeight({
         targetWeight: data.targetWeight,
         phone,
       });
-      onNextStep && onNextStep();
+      if (success) {
+        onNextStep && onNextStep();
+      }
     } catch (error) {
       toast.error("There was an error submitting your weight.");
     }

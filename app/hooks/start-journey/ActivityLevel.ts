@@ -26,15 +26,18 @@ export const useActivityLevel = (): UseActivityLevelResponse => {
         if (responseData?.status !== "successful") { 
           toast.error(responseData?.message || message || "An error occurred");
           setSuccess(false);
+          return false;
         } else {
           toast.success(responseData.message || "Activity level submitted successfully");
           setData(responseData);
           setSuccess(true);
+          return true;
         }
       } catch (error) {
         console.error("Error in submitting Activity Level:", error);
         toast.error("Error in submitting Activity Level");
         setSuccess(false);
+        return false;
       }
     },
     [axios]

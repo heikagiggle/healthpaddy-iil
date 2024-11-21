@@ -14,11 +14,8 @@ const ActiveSchema = z.object({
 
 export type ActiveData = z.infer<typeof ActiveSchema>;
 
-const PhysicallyActive = ({
-  onNextStep,
-  onPrevStep,
-}: ContainerProps) => {
-  const { handleActivityLevel, loading, success } = useActivityLevel();
+const PhysicallyActive = ({ onNextStep, onPrevStep }: ContainerProps) => {
+  const { handleActivityLevel, loading } = useActivityLevel();
   const handler = useForm<ActiveData>({
     resolver: zodResolver(ActiveSchema),
     mode: "onChange",
@@ -27,11 +24,13 @@ const PhysicallyActive = ({
   const onSubmit = async (data: ActiveData) => {
     const phone = sessionStorage.getItem("phone") || "";
     try {
-      await handleActivityLevel({
+      const success = await handleActivityLevel({
         activityLevel: data.activityLevel,
         phone,
       });
-      onNextStep && onNextStep();
+      if (success) {
+        onNextStep && onNextStep();
+      }
     } catch (error) {
       toast.error("There was an error submitting your active level.");
     }

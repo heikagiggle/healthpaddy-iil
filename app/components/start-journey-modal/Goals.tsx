@@ -25,8 +25,10 @@ const Goals = ({ onNextStep, onPrevStep }: ContainerProps) => {
   const onSubmit = async (data: GoalData) => {
     const phone = sessionStorage.getItem("phone") || "";
     try {
-      await handleGoal({ phone, goal: data.goal });
-      onNextStep && onNextStep();
+      const success = await handleGoal({ phone, goal: data.goal });
+      if (success) {
+        onNextStep && onNextStep();
+      }
     } catch (error) {
       toast.error("There was an error submitting your goal.");
     }

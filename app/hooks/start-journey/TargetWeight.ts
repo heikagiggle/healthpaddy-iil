@@ -26,15 +26,18 @@ export const useTargetWeight = (): UseTargetWeightResponse => {
         if (responseData?.status !== "successful") { 
           toast.error(responseData?.message || message || "An error occurred");
           setSuccess(false);
+          return false; 
         } else {
           toast.success(responseData.message || "Target weight submitted successfully");
           setData(responseData);
           setSuccess(true);
+          return true; 
         }
       } catch (error) {
         console.error("Error in submitting TargetWeight:", error);
         toast.error("Error in submitting TargetWeight");
         setSuccess(false);
+        return false;
       }
     },
     [axios]

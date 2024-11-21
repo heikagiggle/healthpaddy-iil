@@ -27,7 +27,7 @@ export interface UseGoalResponse {
   loading: boolean;
   success: boolean;
   data?: GoalResponse | null;
-  handleGoal: (payload: GoalPayload) => Promise<void>;
+  handleGoal: (payload: GoalPayload) => Promise<boolean>;
 }
 //biodata
 export interface BioDataPayload {
@@ -45,7 +45,7 @@ export interface UseBioDataResponse {
   loading: boolean;
   success: boolean;
   data?: BioDataResponse | null;
-  handleBioData: (payload: BioDataPayload) => Promise<void>;
+  handleBioData: (payload: BioDataPayload) => Promise<boolean>;
 }
 //targetweight
 export interface TargetWeightPayload {
@@ -60,7 +60,7 @@ export interface UseTargetWeightResponse {
   loading: boolean;
   success: boolean;
   data?: TargetWeightResponse | null;
-  handleTargetWeight: (payload: TargetWeightPayload) => Promise<void>;
+  handleTargetWeight: (payload: TargetWeightPayload) => Promise<boolean>;
 }
 //goalduration
 export interface GoalDurationPayload {
@@ -75,7 +75,7 @@ export interface UseGoalDurationResponse {
   loading: boolean;
   success: boolean;
   data?: GoalDurationResponse | null;
-  handleGoalDuration: (payload: GoalDurationPayload) => Promise<void>;
+  handleGoalDuration: (payload: GoalDurationPayload) => Promise<boolean>;
 }
 //activitylevel
 export interface ActivityLevelPayload {
@@ -90,7 +90,7 @@ export interface UseActivityLevelResponse {
   loading: boolean;
   success: boolean;
   data?: ActivityLevelResponse | null;
-  handleActivityLevel: (payload: ActivityLevelPayload) => Promise<void>;
+  handleActivityLevel: (payload: ActivityLevelPayload) => Promise<boolean>;
 }
 //healthcondition
 export interface HealthConditionPayload {
@@ -114,5 +114,5 @@ export interface UseHealthConditionResponse {
   loading: boolean;
   success: boolean;
   data?: HealthConditionResponse | null;
-  handleHealthCondition: (payload: HealthConditionPayload) => Promise<void>;
+  handleHealthCondition: (payload: HealthConditionPayload) => Promise<boolean>;
 }

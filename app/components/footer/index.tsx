@@ -18,7 +18,13 @@ export default function Footer() {
               </div>
             </Link>
             <div className="lg:text-left">
-              <p className="text-sm mb-2">Terms & Conditions</p>
+              <Link href="/terms">
+                {" "}
+                <p className="text-sm mb-2 cursor-pointer">
+                  Terms & Conditions
+                </p>
+              </Link>
+
               <p className="text-sm text-white text-opacity-40">
                 Privacy policy
               </p>

@@ -20,21 +20,24 @@ export const useGoal = (): UseGoalResponse => {
           {}
         );
 
-        const { data: responseData, message } = response; 
+        const { data: responseData, message } = response;
         console.log("Response:", response);
 
-        if (responseData?.status !== "successful") { 
+        if (responseData?.status !== "successful") {
           toast.error(responseData?.message || message || "An error occurred");
           setSuccess(false);
+          return false;
         } else {
           toast.success(responseData.message || "Goal submitted successfully");
           setData(responseData);
           setSuccess(true);
+          return true;
         }
       } catch (error) {
         console.error("Error in choosing goal:", error);
         toast.error("Error in choosing goal");
         setSuccess(false);
+        return false;
       }
     },
     [axios]

@@ -32,16 +32,18 @@ const HealthConditions = ({
   const onSubmit = async (data: HealthData) => {
     const phone = sessionStorage.getItem("phone") || "";
     try {
-      await handleHealthCondition({
+      const success = await handleHealthCondition({
         healthCondition: data.healthCondition,
-         phone,
-       });
-      handleConditionSelect(data.healthCondition);
+        phone,
+      });
+      if (success) {
+        handleConditionSelect(data.healthCondition);
+        onNextStep && onNextStep();
+      }
     } catch (error) {
       toast.error("There was an error submitting your health Condition level.");
     }
   };
-
 
   return (
     <Form {...handler}>

@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DefaultModal } from "../modal/DefaultModal";
 import StartJourney from "./StartJourney";
 import PersonalInfo from "./PersonalInfo";
@@ -29,6 +29,15 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
 
   const [selectedCondition, setSelectedCondition] = useState("");
 
+  useEffect(() => {
+    // Ensure you set data after health condition form submission
+    // This could be done using a callback after the health condition step
+    const storedData = sessionStorage.getItem("healthConditionData");
+    if (storedData) {
+      setData(JSON.parse(storedData));
+    }
+  }, []);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -47,9 +56,10 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
 
   const handleConditionSelect = (condition: string) => {
     setSelectedCondition(condition);
-    if (condition === "None") {
+    if (condition === "none") {
       router.push("?step=10");
     } else {
+      // Proceed to the next step if health condition is not "none"
       handleNextStep();
     }
   };
@@ -59,7 +69,7 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
     if (currentStep === 1) return 0;
     return ((currentStep - 1) / (totalSteps - 1)) * 100;
   };
-
+  console.log("Data in StartJourneyModalSteps:", data);
   return (
     <DefaultModal
       heading={"Calorie Calculator"}
@@ -146,3 +156,4 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
 };
 
 export default StartJourneyModalSteps;
+

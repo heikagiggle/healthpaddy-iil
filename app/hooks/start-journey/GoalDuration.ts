@@ -20,21 +20,24 @@ export const useGoalDuration = (): UseGoalDurationResponse => {
           {}
         );
 
-        const { data: responseData, message } = response; 
-        console.log("Response:", response);
+        const { data: responseData, message } = response;
 
-        if (responseData?.status !== "successful") { 
-          toast.error(responseData?.message || message || "An error occurred");
+        if (responseData?.status !== "successful") {
+          toast.error(responseData?.message || message || "Please start over");
           setSuccess(false);
+          return false; // Indicate failure
         } else {
+          // Handle success
           toast.success(responseData.message || "Goal duration submitted successfully");
           setData(responseData);
           setSuccess(true);
+          return true; 
         }
       } catch (error) {
         console.error("Error in submitting Goal Duration:", error);
         toast.error("Error in submitting Goal Duration");
         setSuccess(false);
+        return false;
       }
     },
     [axios]
@@ -42,3 +45,4 @@ export const useGoalDuration = (): UseGoalDurationResponse => {
 
   return { loading, success, data, handleGoalDuration };
 };
+

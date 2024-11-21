@@ -16,7 +16,7 @@ const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
             Calorie Summary
           </h1>
           {!data ? (
-            <p className="text-center text-gray-500">Loading summary...</p> // Fallback
+            <p className="text-center text-gray-500">Loading summary...</p>
           ) : (
             <div className="flex justify-between items-center py-2">
               <ul className="text-[#979797] text-sm flex flex-col gap-y-2">
@@ -25,6 +25,7 @@ const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
                 <li>Body Mass Index</li>
                 <li>Target Weight</li>
                 <li>Duration</li>
+                <li>Health Condition</li>
               </ul>
               <ul className="font-semibold text-sm flex flex-col gap-y-2">
                 <li className="text-[#43A5AE]">{data.data.goal}</li>
@@ -34,6 +35,7 @@ const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
                 </li>
                 <li>{data.data.targetWeight} kg</li>
                 <li>{data.data.durationInMonth} Months</li>
+                <li>{data.data.healthCondition}</li>
               </ul>
             </div>
           )}
@@ -46,12 +48,14 @@ const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
         </h3>
 
         <p className="text-sm font-medium pt-2">
-          To reach your goal, at your current activity level and weight, you’ll need to consume:{" "}
+          To reach your goal, at your current activity level and weight, you’ll
+          need to consume:{" "}
           <span className="text-[#6343AE]">
             {data?.data.requiredCalorie ?? "Loading..."} cal per day
           </span>
         </p>
       </div>
+
       <div className="flex justify-between items-center border-t border-[#0000004D] mt-10 pt-4 px-0 mb-1">
         <Button
           className="bg-transparent border-[#43A5AE] text-[#43A5AE] border"

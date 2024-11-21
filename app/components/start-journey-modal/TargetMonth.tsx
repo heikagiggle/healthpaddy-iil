@@ -16,7 +16,7 @@ const PersonalInfoSchema = z.object({
 export type PersonalInfoData = z.infer<typeof PersonalInfoSchema>;
 
 const TargetMonth = ({ onNextStep, onPrevStep }: ContainerProps) => {
-  const { handleGoalDuration, loading } = useGoalDuration();
+  const { handleGoalDuration, loading} = useGoalDuration();
   const handler = useForm<PersonalInfoData>({
     resolver: zodResolver(PersonalInfoSchema),
     mode: "onChange",
@@ -25,15 +25,18 @@ const TargetMonth = ({ onNextStep, onPrevStep }: ContainerProps) => {
   const onSubmit = async (data: PersonalInfoData) => {
     const phone = sessionStorage.getItem("phone") || "";
     try {
-      await handleGoalDuration({
+      const success = await handleGoalDuration({
         durationInMonth: data.durationInMonth,
         phone,
       });
-      onNextStep && onNextStep();
+      if (success) {
+        onNextStep && onNextStep();
+      }
     } catch (error) {
       toast.error("There was an error submitting your goal duration.");
     }
   };
+  
 
   return (
     <Form {...handler}>

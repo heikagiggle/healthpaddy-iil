@@ -26,15 +26,18 @@ export const useBioData = (): UseBioDataResponse => {
         if (responseData?.status !== "successful") { 
           toast.error(responseData?.message || message || "An error occurred");
           setSuccess(false);
+          return false;
         } else {
           toast.success(responseData.message || "BioData submitted successfully");
           setData(responseData);
           setSuccess(true);
+          return true;
         }
       } catch (error) {
         console.error("Error in filling BioData:", error);
         toast.error("Error in filling BioData");
         setSuccess(false);
+        return false;
       }
     },
     [axios]
