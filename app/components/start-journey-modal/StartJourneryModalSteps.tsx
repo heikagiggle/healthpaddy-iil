@@ -31,10 +31,8 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
 
   useEffect(() => {
     const storedData = sessionStorage.getItem("healthConditionResponse");
-    if (storedData) {
-      setData(JSON.parse(storedData));
-    }
-  }, []);
+    setData(storedData ? JSON.parse(storedData) : null);
+  }, [step]);
 
   const handleOpen = () => {
     setOpen(true);
