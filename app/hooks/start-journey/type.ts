@@ -12,7 +12,7 @@ export interface UseRegisterResponse {
   loading: boolean;
   success: boolean;
   data?: RegisterResponse | null;
-  handleRegister: (payload: RegisterPayload) => Promise<void>;
+  handleRegister: (payload: RegisterPayload) => Promise<boolean>;
 }
 //goal
 export interface GoalPayload {

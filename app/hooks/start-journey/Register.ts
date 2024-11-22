@@ -25,15 +25,18 @@ export const useRegister = (): UseRegisterResponse => {
         if (responseData?.status !== "successful") {
           toast.error(message || "An error occurred");
           setSuccess(false);
+          return false; 
         } else {
           toast.success(responseData.message || "Account created successfully");
           setData(responseData);
           setSuccess(true);
+          return true
         }
       } catch (error) {
         console.error("Error in signing up:", error);
         toast.error("Error in signing up");
         setSuccess(false);
+        return false
       }
     },
     [axios]

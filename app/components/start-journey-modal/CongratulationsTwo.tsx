@@ -9,6 +9,7 @@ interface CongratulationsTwoProps extends ContainerProps {
 }
 
 const CongratulationsTwo = ({ onPrevStep, selectedCondition, data }: CongratulationsTwoProps) => {
+  console.log(data);
   return (
     <div className="flex flex-col gap-y-4">
       <div className="flex flex-col justify-center items-center">
@@ -29,14 +30,14 @@ const CongratulationsTwo = ({ onPrevStep, selectedCondition, data }: Congratulat
                 <li>Health Conditions</li>
               </ul>
               <ul className="font-semibold text-sm flex flex-col gap-y-2">
-                <li className="text-[#43A5AE]">{data.data.goal}</li>
-                <li>{data.data.requiredCalorie} cal</li>
+                <li className="text-[#43A5AE]">{data?.data.goal ?? "None"}</li>
+                <li>{data?.data.requiredCalorie ?? "None"} cal</li>
                 <li>
-                  {data.data.bmi} ({data.data.bmiDescription})
+                  {data?.data.bmi ?? "None"} ({data.data.bmiDescription})
                 </li>
-                <li>{data.data.targetWeight} kg</li>
-                <li>{data.data.durationInMonth} Months</li>
-                <li>{selectedCondition.replace("_", " ")}</li>
+                <li>{data?.data.targetWeight ?? "None"} kg</li>
+                <li>{data?.data.durationInMonth ?? "None"} Months</li>
+                <li>{data?.data.healthCondition ?? "None"}</li>
               </ul>
             </div>
           )}
@@ -49,7 +50,7 @@ const CongratulationsTwo = ({ onPrevStep, selectedCondition, data }: Congratulat
         </h3>
 
         <p className="text-sm font-medium md:py-2 py-1">
-          Given your {selectedCondition.replace("_", " ")}, your plan will need
+          Given your {data?.data.healthCondition ?? "health condition"}, your plan will need
           to be fully customized to you. Once you subscribe to the customized
           plan, we’ll send a link to a form in your email where you can provide
           your health data and food preferences for a tailored meal plan.

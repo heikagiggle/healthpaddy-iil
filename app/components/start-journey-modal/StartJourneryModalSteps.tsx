@@ -22,17 +22,15 @@ interface Props {
 const StartJourneyModalSteps = ({ trigger }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [data, setData] = useState<HealthConditionResponse | null>(null);
+  const [selectedCondition, setSelectedCondition] = useState<string>("");
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const step = searchParams.get("step") ?? "1";
   const currentStep = parseInt(step);
 
-  const [selectedCondition, setSelectedCondition] = useState("");
-
   useEffect(() => {
-    // Ensure you set data after health condition form submission
-    // This could be done using a callback after the health condition step
-    const storedData = sessionStorage.getItem("healthConditionData");
+    const storedData = sessionStorage.getItem("healthConditionResponse");
     if (storedData) {
       setData(JSON.parse(storedData));
     }
@@ -42,7 +40,7 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
     setOpen(true);
   };
 
-   const handleNextStep = () => {
+  const handleNextStep = () => {
     if (currentStep < totalSteps) {
       router.push(`?step=${currentStep + 1}`);
     }
@@ -56,10 +54,9 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
 
   const handleConditionSelect = (condition: string) => {
     setSelectedCondition(condition);
-    if (condition === "none") {
+    if (condition === "None") {
       router.push("?step=10");
     } else {
-      // Proceed to the next step if health condition is not "none"
       handleNextStep();
     }
   };
@@ -69,7 +66,7 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
     if (currentStep === 1) return 0;
     return ((currentStep - 1) / (totalSteps - 1)) * 100;
   };
-  console.log("Data in StartJourneyModalSteps:", data);
+
   return (
     <DefaultModal
       heading={"Calorie Calculator"}
@@ -101,19 +98,13 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
           />
         )}
         {step === "3" && (
-          <Goals
-            onNextStep={handleNextStep}
-            onPrevStep={handlePrevStep}
-          />
+          <Goals onNextStep={handleNextStep} onPrevStep={handlePrevStep} />
         )}
         {step === "4" && (
           <Great onNextStep={handleNextStep} onPrevStep={handlePrevStep} />
         )}
         {step === "5" && (
-          <BodyInfo
-            onNextStep={handleNextStep}
-            onPrevStep={handlePrevStep}
-          />
+          <BodyInfo onNextStep={handleNextStep} onPrevStep={handlePrevStep} />
         )}
         {step === "6" && (
           <TargetWeight
@@ -141,13 +132,14 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
           />
         )}
         {step === "10" &&
+          data &&
           (selectedCondition === "none" ? (
-            <CongratulationsOne onPrevStep={handlePrevStep}  data={data}  />
+            <CongratulationsOne onPrevStep={handlePrevStep} data={data} />
           ) : (
             <CongratulationsTwo
               onPrevStep={handlePrevStep}
               selectedCondition={selectedCondition}
-              data={data} 
+              data={data}
             />
           ))}
       </div>
@@ -156,4 +148,3 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
 };
 
 export default StartJourneyModalSteps;
-

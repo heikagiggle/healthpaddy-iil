@@ -38,8 +38,8 @@ const HealthConditions = ({
       });
       if (success) {
         handleConditionSelect(data.healthCondition);
-        onNextStep && onNextStep();
       }
+      
     } catch (error) {
       toast.error("There was an error submitting your health Condition level.");
     }

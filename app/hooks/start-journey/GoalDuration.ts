@@ -25,9 +25,8 @@ export const useGoalDuration = (): UseGoalDurationResponse => {
         if (responseData?.status !== "successful") {
           toast.error(responseData?.message || message || "Please start over");
           setSuccess(false);
-          return false; // Indicate failure
+          return false;
         } else {
-          // Handle success
           toast.success(responseData.message || "Goal duration submitted successfully");
           setData(responseData);
           setSuccess(true);

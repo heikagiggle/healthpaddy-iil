@@ -8,6 +8,7 @@ interface CongratulationsOneProps extends ContainerProps {
 }
 
 const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
+  console.log(data);
   return (
     <div className="flex flex-col gap-y-4">
       <div className="flex flex-col justify-center items-center">
@@ -28,14 +29,15 @@ const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
                 <li>Health Condition</li>
               </ul>
               <ul className="font-semibold text-sm flex flex-col gap-y-2">
-                <li className="text-[#43A5AE]">{data.data.goal}</li>
-                <li>{data.data.requiredCalorie} cal</li>
+                <li className="text-[#43A5AE]">{data?.data.goal ?? "None"}</li>
+                <li>{data?.data.requiredCalorie ?? "None"} cal</li>
                 <li>
-                  {data.data.bmi} ({data.data.bmiDescription})
+                  {data?.data.bmi ?? "None"} (
+                  {data?.data.bmiDescription ?? "None"})
                 </li>
-                <li>{data.data.targetWeight} kg</li>
-                <li>{data.data.durationInMonth} Months</li>
-                <li>{data.data.healthCondition}</li>
+                <li>{data?.data.targetWeight ?? "None"} kg</li>
+                <li>{data?.data.durationInMonth ?? "None"} Months</li>
+                <li>{data?.data.healthCondition ?? "None"}</li>
               </ul>
             </div>
           )}

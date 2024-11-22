@@ -33,14 +33,16 @@ const PersonalInfo = ({ onNextStep, onPrevStep }: ContainerProps) => {
   const onSubmit = async (data: PersonalInfoData) => {
     sessionStorage.setItem("phone", data.phone ?? "");
     try {
-      await handleRegister({
+      const success = await handleRegister({
         firstname: data.firstname,
         lastname: data.lastname,
         email: data.email,
         phone: data.phone ?? "",
       });
   
-      onNextStep && onNextStep();
+      if (success) {
+        onNextStep && onNextStep();
+      }
     } catch (e) {
       toast.error("Register error");
     }

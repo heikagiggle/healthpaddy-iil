@@ -36,6 +36,12 @@ export const useHealthCondition = (): UseHealthConditionResponse => {
           );
           setData(responseData);
           setSuccess(true);
+
+          sessionStorage.setItem(
+            "healthConditionResponse",
+            JSON.stringify(responseData)
+          );
+
           return true;
         }
       } catch (error) {
