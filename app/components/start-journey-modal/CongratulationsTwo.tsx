@@ -37,7 +37,7 @@ const CongratulationsTwo = ({ onPrevStep, selectedCondition, data }: Congratulat
                 </li>
                 <li>{data?.data.targetWeight ?? "None"} kg</li>
                 <li>{data?.data.durationInMonth ?? "None"} Months</li>
-                <li>{data?.data.healthCondition ?? "None"}</li>
+                <li>{selectedCondition.replace("_", " ")}</li>
               </ul>
             </div>
           )}
@@ -50,7 +50,7 @@ const CongratulationsTwo = ({ onPrevStep, selectedCondition, data }: Congratulat
         </h3>
 
         <p className="text-sm font-medium md:py-2 py-1">
-          Given your {data?.data.healthCondition ?? "health condition"}, your plan will need
+          Given your {selectedCondition.replace("_", " ")}, your plan will need
           to be fully customized to you. Once you subscribe to the customized
           plan, we’ll send a link to a form in your email where you can provide
           your health data and food preferences for a tailored meal plan.
