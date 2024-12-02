@@ -1,5 +1,5 @@
 import { ContainerProps } from "../../utils/type";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "../ui/form";
 import { TextInput } from "../form/text-input";
@@ -10,6 +10,12 @@ import { useBioData } from "../../hooks/start-journey/BioData";
 import toast from "react-hot-toast";
 import { generateDays, generateMonths, generateYears } from "./helpers";
 import { BodyInfoData, BodyInfoSchema } from "./schema/schema";
+import { useMemo } from "react";
+
+const calculateDaysInMonth = (month: number, year: number) => {
+  if (!month) return 31;
+  return new Date(year, month, 0).getDate();
+};
 
 const BodyInfo = ({ onNextStep, onPrevStep }: ContainerProps) => {
   const { handleBioData, loading, success } = useBioData();
@@ -18,6 +24,22 @@ const BodyInfo = ({ onNextStep, onPrevStep }: ContainerProps) => {
     resolver: zodResolver(BodyInfoSchema),
     mode: "onChange",
   });
+
+  const { control } = handler;
+
+  const selectedMonth = useWatch({ control, name: "dateOfBirth.month" });
+  const selectedYear = useWatch({ control, name: "dateOfBirth.year" });
+
+  const days = useMemo(() => {
+    const month = parseInt(selectedMonth || "0", 10);
+    const year = parseInt(selectedYear || "0", 10);
+    const daysInMonth = calculateDaysInMonth(month, year);
+    return Array.from({ length: daysInMonth }, (_, i) => ({
+      label: (i + 1).toString(),
+      value: (i + 1).toString(),
+      keywords: [(i + 1).toString()],
+    }));
+  }, [selectedMonth, selectedYear]);
 
   const onSubmit = async (data: BodyInfoData) => {
     const phone = sessionStorage.getItem("phone") || "";
@@ -51,12 +73,12 @@ const BodyInfo = ({ onNextStep, onPrevStep }: ContainerProps) => {
               Date of birth
             </label>
             <div className="flex sm:space-x-4 md:space-x-6 lg:space-x-4 space-x-2 mt-2">
-              {/* Day */}
+              {/* Year */}
               <SelectInput
-                name="dateOfBirth.day"
-                label="Day"
-                placeholder="Select Day"
-                items={generateDays()}
+                name="dateOfBirth.year"
+                label="Year"
+                placeholder="Select Year"
+                items={generateYears()}
                 className="w-[30%] sm:w-full"
               />
               {/* Month */}
@@ -67,12 +89,12 @@ const BodyInfo = ({ onNextStep, onPrevStep }: ContainerProps) => {
                 items={generateMonths}
                 className="w-[30%] sm:w-full"
               />
-              {/* Year */}
+              {/* Day */}
               <SelectInput
-                name="dateOfBirth.year"
-                label="Year"
-                placeholder="Select Year"
-                items={generateYears()}
+                name="dateOfBirth.day"
+                label="Day"
+                placeholder="Select Day"
+                items={days}
                 className="w-[30%] sm:w-full"
               />
             </div>
