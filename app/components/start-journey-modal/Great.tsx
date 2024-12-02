@@ -2,7 +2,11 @@ import { ContainerProps } from "../../utils/type";
 import { Button } from "../Button/Button";
 import Image from "next/image";
 
-const Great = ({ onNextStep, onPrevStep }: ContainerProps) => {
+interface GreatProps extends ContainerProps {
+  selectedGoal: string;
+}
+
+const Great = ({ onNextStep, onPrevStep, selectedGoal }: GreatProps) => {
   return (
     <div className="flex flex-col gap-y-6">
       <div className=" text-[#181818]">
@@ -11,9 +15,11 @@ const Great = ({ onNextStep, onPrevStep }: ContainerProps) => {
         </h3>
 
         <p className=" my-4 font-medium">
-          You’ve made an empowering choice by selecting the Lose Weight option!
-          Our meal plans are here to support you on your weight loss journey,
-          guiding you towards a healthier, more vibrant you
+          You’ve made an empowering choice by selecting the{" "}
+          {selectedGoal.replace("-", " ").toLowerCase()} option! Our meal plans
+          are here to support you on your{" "}
+          {selectedGoal.replace("-", " ").toLowerCase()} journey, guiding you
+          towards a healthier, more vibrant you.
         </p>
       </div>
 

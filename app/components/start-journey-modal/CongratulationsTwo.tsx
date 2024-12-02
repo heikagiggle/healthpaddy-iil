@@ -2,13 +2,24 @@ import { ContainerProps } from "../../utils/type";
 import { Button } from "../Button/Button";
 import Link from "next/link";
 import { HealthConditionResponse } from "../../hooks/start-journey/type";
+import Image from "next/image";
 
 interface CongratulationsTwoProps extends ContainerProps {
   selectedCondition: string;
   data: HealthConditionResponse | null;
 }
 
-const CongratulationsTwo = ({ onPrevStep, selectedCondition, data }: CongratulationsTwoProps) => {
+const CongratulationsTwo = ({
+  onPrevStep,
+  selectedCondition,
+  data,
+}: CongratulationsTwoProps) => {
+  const formatGoal = (goal: string | undefined): string => {
+    if (!goal) return "None";
+    return goal
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  };
   console.log(data);
   return (
     <div className="flex flex-col gap-y-4">
@@ -18,9 +29,9 @@ const CongratulationsTwo = ({ onPrevStep, selectedCondition, data }: Congratulat
             Calorie Summary
           </h1>
           {!data ? (
-            <p className="text-center text-gray-500">Loading summary...</p> 
+            <p className="text-center text-gray-500">Loading summary...</p>
           ) : (
-            <div className="flex justify-between items-center py-2">
+            <div className="flex justify-between items-center py-2 gap-x-1">
               <ul className="text-[#979797] text-sm flex flex-col gap-y-2">
                 <li>Weight Goal</li>
                 <li>Calorie Need</li>
@@ -29,15 +40,17 @@ const CongratulationsTwo = ({ onPrevStep, selectedCondition, data }: Congratulat
                 <li>Duration</li>
                 <li>Health Conditions</li>
               </ul>
-              <ul className="font-semibold text-sm flex flex-col gap-y-2">
-                <li className="text-[#43A5AE]">{data?.data.goal ?? "None"}</li>
-                <li>{data?.data.requiredCalorie ?? "None"} cal</li>
-                <li>
-                  {data?.data.bmi ?? "None"} ({data.data.bmiDescription})
+              <ul className="font-semibold text-sm flex flex-col gap-y-2 text-right">
+                <li className="text-[#43A5AE]">
+                  {formatGoal(data?.data?.goal)}
                 </li>
-                <li>{data?.data.targetWeight ?? "None"} kg</li>
-                <li>{data?.data.durationInMonth ?? "None"} Months</li>
-                <li>{selectedCondition.replace("_", " ")}</li>
+                <li>{data?.data?.requiredCalorie ?? "None"} cal</li>
+                <li>
+                  {data?.data?.bmi ?? "None"} ({data?.data?.bmiDescription})
+                </li>
+                <li>{data?.data?.targetWeight ?? "None"} kg</li>
+                <li>{data?.data?.durationInMonth ?? "None"} Months</li>
+                <li>{selectedCondition.replace("_", " ") || "None"}</li>
               </ul>
             </div>
           )}
@@ -50,11 +63,80 @@ const CongratulationsTwo = ({ onPrevStep, selectedCondition, data }: Congratulat
         </h3>
 
         <p className="text-sm font-medium md:py-2 py-1">
-          Given your {selectedCondition.replace("_", " ")}, your plan will need
-          to be fully customized to you. Once you subscribe to the customized
-          plan, we’ll send a link to a form in your email where you can provide
-          your health data and food preferences for a tailored meal plan.
+          Given your {selectedCondition.replace("_", " ") || "health condition"}
+          , your plan will need to be fully customized to you. Once you
+          subscribe to the customized plan, we’ll send a link to a form in your
+          email where you can provide your health data and food preferences for
+          a tailored meal plan.
         </p>
+      </div>
+
+      <div className="text-[#43A5AE] my-1 font-medium flex flex-col justify-center items-center">
+        <Link href="/free-meal-plans">
+          <p className="cursor-pointer">Generate free meal plan</p>
+        </Link>
+        <p className="text-[#18181880] text-xs">or</p>
+        <Link href="/price">
+          <p>Get access to 30 day meal plan</p>
+        </Link>
+      </div>
+
+      <div className="my-1 flex flex-col justify-center items-center my">
+        <h1 className="text-[#18181899] text-sm">Share</h1>
+        <div className="flex gap-x-3 items-center mt-3">
+          <a href={"https://wa.me/15550548825/?text=hi"}>
+            <Image
+              src={
+                "https://files.skillpaddy.com/public/image/facebook-1728651338133.png"
+              }
+              alt="facebook"
+              width={32}
+              height={32}
+            />
+          </a>
+          <a
+            href={
+              "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhealthpaddy.io"
+            }
+          >
+            <Image
+              src={
+                "https://files.skillpaddy.com/public/image/instagram-1728651693984.png"
+              }
+              alt="instagram"
+              width={32}
+              height={32}
+            />
+          </a>
+          <a
+            href={
+              "https://www.instagram.com/share/?url=https%3A%2F%2Fhealthpaddy.io"
+            }
+          >
+            <Image
+              src={
+                "https://files.skillpaddy.com/public/image/x-1728651842121.png"
+              }
+              alt="X"
+              width={32}
+              height={32}
+            />
+          </a>
+          <a
+            href={
+              "https://www.instagram.com/share/?url=https%3A%2F%2Fhealthpaddy.io"
+            }
+          >
+            <Image
+              src={
+                "https://files.skillpaddy.com/public/image/whatsapp-1728651987141.png"
+              }
+              alt="whatsapp"
+              width={32}
+              height={32}
+            />
+          </a>
+        </div>
       </div>
 
       <div className="flex justify-between items-center border-t border-[#0000004D] md:mt-6 mt-2 pt-4 px-0 mb-1">

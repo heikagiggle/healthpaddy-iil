@@ -2,6 +2,7 @@ import { ContainerProps } from "../../utils/type";
 import { Button } from "../Button/Button";
 import Link from "next/link";
 import { HealthConditionResponse } from "../../hooks/start-journey/type";
+import Image from "next/image";
 
 interface CongratulationsOneProps extends ContainerProps {
   data: HealthConditionResponse | null;
@@ -9,6 +10,13 @@ interface CongratulationsOneProps extends ContainerProps {
 
 const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
   console.log(data);
+  const formatGoal = (goal: string | undefined): string => {
+    if (!goal) return "None";
+    return goal
+      .replace(/-/g, " ") // Replace hyphens with spaces
+      .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize the first letter of each word
+  };
+
   return (
     <div className="flex flex-col gap-y-4">
       <div className="flex flex-col justify-center items-center">
@@ -19,7 +27,7 @@ const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
           {!data ? (
             <p className="text-center text-gray-500">Loading summary...</p>
           ) : (
-            <div className="flex justify-between items-center py-2">
+            <div className="flex justify-between items-center py-2 gap-x-1">
               <ul className="text-[#979797] text-sm flex flex-col gap-y-2">
                 <li>Weight Goal</li>
                 <li>Calorie Need</li>
@@ -28,8 +36,10 @@ const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
                 <li>Duration</li>
                 <li>Health Condition</li>
               </ul>
-              <ul className="font-semibold text-sm flex flex-col gap-y-2">
-                <li className="text-[#43A5AE]">{data?.data.goal ?? "None"}</li>
+              <ul className="font-semibold text-sm flex flex-col gap-y-2 text-right">
+                <li className="text-[#43A5AE]">
+                  {formatGoal(data?.data?.goal)}
+                </li>
                 <li>{data?.data.requiredCalorie ?? "None"} cal</li>
                 <li>
                   {data?.data.bmi ?? "None"} (
@@ -56,6 +66,64 @@ const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
             {data?.data.requiredCalorie ?? "Loading..."} cal per day
           </span>
         </p>
+      </div>
+
+      <div className="my-1 flex flex-col justify-center items-center my">
+        <h1 className="text-[#18181899] text-sm">Share</h1>
+        <div className="flex gap-x-3 items-center mt-3">
+          <a href={"https://wa.me/15550548825/?text=hi"}>
+            <Image
+              src={
+                "https://files.skillpaddy.com/public/image/facebook-1728651338133.png"
+              }
+              alt="facebook"
+              width={32}
+              height={32}
+            />
+          </a>
+          <a
+            href={
+              "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhealthpaddy.io"
+            }
+          >
+            <Image
+              src={
+                "https://files.skillpaddy.com/public/image/instagram-1728651693984.png"
+              }
+              alt="instagram"
+              width={32}
+              height={32}
+            />
+          </a>
+          <a
+            href={
+              "https://www.instagram.com/share/?url=https%3A%2F%2Fhealthpaddy.io"
+            }
+          >
+            <Image
+              src={
+                "https://files.skillpaddy.com/public/image/x-1728651842121.png"
+              }
+              alt="X"
+              width={32}
+              height={32}
+            />
+          </a>
+          <a
+            href={
+              "https://www.instagram.com/share/?url=https%3A%2F%2Fhealthpaddy.io"
+            }
+          >
+            <Image
+              src={
+                "https://files.skillpaddy.com/public/image/whatsapp-1728651987141.png"
+              }
+              alt="whatsapp"
+              width={32}
+              height={32}
+            />
+          </a>
+        </div>
       </div>
 
       <div className="flex justify-between items-center border-t border-[#0000004D] mt-10 pt-4 px-0 mb-1">

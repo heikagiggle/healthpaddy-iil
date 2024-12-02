@@ -1,6 +1,5 @@
 import React from "react";
-import terms from "../data/terms.json"; // Adjust the path based on where you store the JSON file
-
+import terms from "../data/terms.json"; 
 export default function TermsAndConditions() {
   return (
     <div className="container mx-auto px-6 py-8 text-sm">

@@ -98,8 +98,12 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
         {step === "3" && (
           <Goals onNextStep={handleNextStep} onPrevStep={handlePrevStep} />
         )}
-        {step === "4" && (
-          <Great onNextStep={handleNextStep} onPrevStep={handlePrevStep} />
+         {step === "4" && (
+          <Great
+            onNextStep={handleNextStep}
+            onPrevStep={handlePrevStep}
+            selectedGoal={sessionStorage.getItem("goal") || "None"}
+          />
         )}
         {step === "5" && (
           <BodyInfo onNextStep={handleNextStep} onPrevStep={handlePrevStep} />

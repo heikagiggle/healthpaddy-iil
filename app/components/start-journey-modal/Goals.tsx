@@ -24,6 +24,7 @@ const Goals = ({ onNextStep, onPrevStep }: ContainerProps) => {
 
   const onSubmit = async (data: GoalData) => {
     const phone = sessionStorage.getItem("phone") || "";
+    sessionStorage.setItem("goal", data.goal);
     try {
       const success = await handleGoal({ phone, goal: data.goal });
       if (success) {
