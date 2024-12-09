@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { AllMealPlanResponseData, AllMealPlanResponseProps } from './type';
+import {  AllMealPlanResponseProps } from './type';
 import { routes } from '../helper/routes';
 import { useFetcher } from '../useFetcher';
 
 export const useGetMealPlans = (phone: string): AllMealPlanResponseProps => {
-  const [data, setData] = useState<Array<AllMealPlanResponseData>>([]);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -13,13 +12,13 @@ export const useGetMealPlans = (phone: string): AllMealPlanResponseProps => {
     data: response,
     mutate,
     isValidating: isFetching,
-  } = useFetcher<Array<AllMealPlanResponseData>>(routes.GET_ALL_MEAL_PLANS(phone));
+  } = useFetcher<{ status: string; message: string }>(routes.GET_ALL_MEAL_PLANS(phone));
 
   useEffect(() => {
     if (response && !isFetching) {
-      const { data: responseData, success: responseSuccess, message } = response;
-      if (responseSuccess && responseData) {
-        setData(responseData);
+      const { success: responseSuccess, message } = response;
+      if (responseSuccess) {
+
         setSuccess(true);
       } else {
         console.error('Error occurred:', message || 'Unknown error');
@@ -30,8 +29,8 @@ export const useGetMealPlans = (phone: string): AllMealPlanResponseProps => {
 
   return {
     loading,
-    data,
     success,
-    mutate,
+    message: response?.message || 'Meal plans fetched successfully',
   };
 };
+
