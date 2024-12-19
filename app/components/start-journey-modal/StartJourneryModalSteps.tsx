@@ -14,6 +14,7 @@ import HealthConditions from "./HealthConditions";
 import CongratulationsOne from "./CongratulationsOne";
 import CongratulationsTwo from "./CongratulationsTwo";
 import { HealthConditionResponse } from "../../hooks/start-journey/type";
+import { useGetMealPlans } from "@/app/hooks/meal-plan/GetMealPlan";
 
 interface Props {
   trigger: React.ReactNode;
@@ -32,6 +33,7 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
   useEffect(() => {
     const storedData = sessionStorage.getItem("healthConditionResponse");
     setData(storedData ? JSON.parse(storedData) : null);
+
   }, [step]);
 
   const handleOpen = () => {
@@ -67,7 +69,7 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
 
   return (
     <DefaultModal
-      heading={"Calorie Calculator"}
+      heading={"Xmas Glow Up Challenge!🎅"}
       description={""}
       trigger={<div onClick={handleOpen}>{trigger}</div>}
       progressBar={
@@ -98,7 +100,7 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
         {step === "3" && (
           <Goals onNextStep={handleNextStep} onPrevStep={handlePrevStep} />
         )}
-         {step === "4" && (
+        {step === "4" && (
           <Great
             onNextStep={handleNextStep}
             onPrevStep={handlePrevStep}
@@ -136,7 +138,7 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
         {step === "10" &&
           data &&
           (selectedCondition === "none" ? (
-            <CongratulationsOne onPrevStep={handlePrevStep} data={data} />
+            <CongratulationsOne onPrevStep={handlePrevStep} data={data}/>
           ) : (
             <CongratulationsTwo
               onPrevStep={handlePrevStep}
