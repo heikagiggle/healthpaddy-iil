@@ -69,7 +69,7 @@ const StartJourneyModalSteps = ({ trigger }: Props) => {
 
   return (
     <DefaultModal
-      heading={"Xmas Glow Up Challenge!🎅"}
+      heading={"Calorie Calculator"}
       description={""}
       trigger={<div onClick={handleOpen}>{trigger}</div>}
       progressBar={

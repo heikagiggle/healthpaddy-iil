@@ -66,22 +66,32 @@ const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
       <h3 className="sm:text-lg mt-2 lg:text-2xl font-semibold leading-snug">
         Congratulations, We’ve successfully calculated your calorie target!
       </h3>
-      {/* 
+      
       <p className="text-sm font-medium pt-2">
         To reach your goal, at your current activity level and weight, you’ll
         need to consume:{" "}
         <span className="text-[#6343AE]">
           {data?.data.requiredCalorie ?? "Loading..."} cal per day.
         </span>
-      </p> */}
-         <p className="text-base font-semibold md:py-2 py-1">
+      </p>
+         {/* <p className="text-base font-semibold md:py-2 py-1">
           Your customized meal plan has been successfully sent to your{" "}
           <span className="text-[#43A5AE] text-xl font-bold px-1">
             email.
           </span>
           Enjoy your journey to healthier living!
-        </p>
+        </p> */}
     </div>
+
+    <div className="text-[#43A5AE] my-1 font-medium flex flex-col justify-center items-center">
+        <Link href="/free-meal-plans">
+          <p className="cursor-pointer">Generate free meal plan</p>
+        </Link>
+        <p className="text-[#18181880] text-xs">or</p>
+        <Link href="/price">
+          <p>Get access to 30 day meal plan</p>
+        </Link>
+      </div>
 
     {/* <div className="my-1 flex flex-col justify-center items-center my">
       <h1 className="text-[#18181899] text-sm">Share</h1>
@@ -149,7 +159,7 @@ const CongratulationsOne = ({ onPrevStep, data }: CongratulationsOneProps) => {
         Back
       </Button>
       <Link href="/price">
-        <Button disabled>Proceed</Button>
+        <Button>Proceed</Button>
       </Link>
     </div>
   </div>

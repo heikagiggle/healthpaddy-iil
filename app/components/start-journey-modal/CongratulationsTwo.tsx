@@ -69,27 +69,26 @@ const CongratulationsTwo = ({
         Congratulations, We’ve successfully calculated your calorie target!
       </h3>
 
-      {/* <p className="text-sm font-medium md:py-2 py-1">
+      <p className="text-sm font-medium md:py-2 py-1">
         Given your {selectedCondition.replace("_", " ") || "health condition"}
         ,  Your meal plan is now ready. 
-        Simply check your email to view your plan and start your health journey! 🍽️
-      </p> */}
+      </p>
 
-      <p className="text-base font-semibold md:py-2 py-1">
+      {/* <p className="text-base font-semibold md:py-2 py-1">
         Your customized meal plan has been successfully sent to your{" "}
         <span className="text-[#43A5AE] text-xl font-bold px-1">email.</span>
         Enjoy your journey to healthier living!
-      </p>
+      </p> */}
     </div>
 
     <div className="text-[#43A5AE] my-1 font-medium flex flex-col justify-center items-center">
-      {/* <Link href="/free-meal-plans">
+      <Link href="/free-meal-plans">
         <p className="cursor-pointer">Generate free meal plan</p>
-      </Link> */}
-      {/* <p className="text-[#18181880] text-xs">or</p>
+      </Link>
+      <p className="text-[#18181880] text-xs">or</p>
       <Link href="/price">
         <p>Get access to 30 day meal plan</p>
-      </Link> */}
+      </Link>
     </div>
     {/* 
     <div className="my-1 flex flex-col justify-center items-center my">
@@ -158,7 +157,7 @@ const CongratulationsTwo = ({
         Back
       </Button>
       <Link href="/price">
-        <Button disabled>Proceed</Button>
+        <Button>Proceed</Button>
       </Link>
     </div>
   </div>

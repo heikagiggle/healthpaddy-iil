@@ -51,8 +51,8 @@ const Goals = ({ onNextStep, onPrevStep }: ContainerProps) => {
             label=""
             options={[
               { label: "Lose weight", value: "lose-weight" },
-              // { label: "Maintain weight", value: "maintain-weight" },
-              // { label: "Gain weight", value: "gain-weight" },
+              { label: "Maintain weight", value: "maintain-weight" },
+              { label: "Gain weight", value: "gain-weight" },
             ]}
           />
           <div className="flex justify-between items-center border-t border-[#0000004D] mt-10 pt-4 px-0 mb-2">
