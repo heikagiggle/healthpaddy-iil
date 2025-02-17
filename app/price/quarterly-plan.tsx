@@ -7,12 +7,12 @@ const QuarterlyPlan = () => {
       <div className="flex flex-col flex-grow">
         <div>
           <h2 className="text-[#0E5A61] bg-[#4FC2CD] bg-opacity-[12%] text-base rounded-2xl py-1 px-2 w-[130px] pl-2.5 font-500">
-            Quarterly Plan
+            2 Months Plan
           </h2>
           <p className="text-[#181818] text-3xl md:text-4xl lg:text-5xl font-semibold mt-5 mb-1">
-            N40,000
+            N25,000
           </p>
-          <p className="text-[#181818] opacity-70 text-sm">Per Quarter</p>
+          {/* <p className="text-[#181818] opacity-70 text-sm">Per Quarter</p> */}
           <div className="text-left text-sm mt-6">
             <p>Renews automatically</p>
             <p>Cancel anytime</p>
@@ -25,7 +25,7 @@ const QuarterlyPlan = () => {
             <div>
               <CheckIcon className="h-4 w-4" />
             </div>
-            <p>3 months meal plan</p>
+            <p>2 months meal plan</p>
           </li>
           <li className="flex items-center gap-x-5">
             <div>

@@ -7,12 +7,12 @@ const MonthlyPlan = () => {
       <div className="flex flex-col flex-grow">
         <div>
           <h2 className="text-[#0E5A61] bg-[#4FC2CD] bg-opacity-[12%] text-base rounded-2xl py-1 px-2 w-[120px] pl-2.5 font-500">
-            Monthly Plan
+            1 Month Plan
           </h2>
           <p className="text-[#181818] text-3xl md:text-4xl lg:text-5xl font-semibold mt-5 mb-1">
             N15,000
           </p>
-          <p className="text-[#181818] opacity-70 text-sm">Per Month</p>
+          {/* <p className="text-[#181818] opacity-70 text-sm">Per Month</p> */}
           <div className="text-left text-sm mt-6">
             <p>Renews automatically</p>
             <p>Cancel anytime</p>
